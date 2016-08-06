@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "userServiceUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'userServiceUrl'"
+  },
+  {
+    "name": "userPostsServiceUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'userPostsServiceUrl'"
+  }
+]}
