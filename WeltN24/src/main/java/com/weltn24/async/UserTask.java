@@ -8,7 +8,11 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.async.DeferredResult;
 import com.weltn24.user.User;
 
-
+/**
+ * A background task to get specific user.
+ * @author mohammad
+ * @see AsyncUserController
+ */
 public class UserTask implements Runnable  {
 	private String serviceUrl;
 	private DeferredResult<User> result;

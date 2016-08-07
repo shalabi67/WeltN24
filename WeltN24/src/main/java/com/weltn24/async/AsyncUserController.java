@@ -14,12 +14,25 @@ import com.weltn24.WeltN24Application;
 import com.weltn24.user.Post;
 import com.weltn24.user.User;
 
+/**
+ * controller to get a user and user posts.
+ * 
+ * @author mohammad
+ */
 @RestController
 public class AsyncUserController {
 	
 	@Autowired
 	WeltN24Application application;
 	
+	/**
+	 * asynchronously get a user specified by specific userId
+	 * 
+	 * @author mohammad
+	 * @param userId
+	 * @return return User object
+	 * @see User
+	 */
 	@RequestMapping(value ="/users/{userId}", method = RequestMethod.GET)
     public DeferredResult<User> getUser(@PathVariable Long userId) {
 		String serviceUrl = application.getUsersServiceUrl() + userId;
@@ -35,6 +48,14 @@ public class AsyncUserController {
 	    		
     }
 
+	/**
+	 * asynchronously get all posts posted by a user specified by userId
+	 * 
+	 * @author mohammad
+	 * @param userId
+	 * @return return an array of posts asynchronously
+	 * @see Post
+	 */
     @RequestMapping(value ="/posts", method = RequestMethod.GET)
     public DeferredResult<Post[]> getUserPosts(@RequestParam(value="userId") long userId) {
     	String serviceUrl = application.getPostsServiceUrl() + userId;

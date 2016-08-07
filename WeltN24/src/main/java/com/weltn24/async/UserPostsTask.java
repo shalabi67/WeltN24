@@ -9,7 +9,11 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import com.weltn24.user.Post;
 
-
+/**
+ * A background task to get specific user posts.
+ * @author mohammad
+ * @see AsyncUserController
+ */
 public class UserPostsTask implements Runnable  {
 	private String serviceUrl;
 	private DeferredResult<Post[]> result;
