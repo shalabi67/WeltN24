@@ -2,7 +2,7 @@ package com.weltn24.user;
 
 
 public final class User {
-	private long id;
+	private int id;
 	private String name;
 	private String username;
 	private String email;
@@ -15,11 +15,11 @@ public final class User {
 		
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

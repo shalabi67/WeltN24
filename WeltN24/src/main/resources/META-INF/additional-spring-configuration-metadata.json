@@ -8,5 +8,15 @@
     "name": "postsServiceUrl",
     "type": "java.lang.String",
     "description": "A description for 'postsServiceUrl'"
+  },
+  {
+    "name": "applicationPostUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'applicationPostUrl'"
+  },
+  {
+    "name": "applicationUsersUrl",
+    "type": "java.lang.String",
+    "description": "A description for 'applicationUsersUrl'"
   }
 ]}

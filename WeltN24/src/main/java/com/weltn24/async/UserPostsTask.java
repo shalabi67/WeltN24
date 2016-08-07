@@ -31,7 +31,8 @@ public class UserPostsTask implements Runnable  {
   			userPosts = userEntity.getBody();
   		}
   		catch(RestClientException e) {
-  			e.printStackTrace();
+  			result.setErrorResult(e);
+  			return;
   		} 
   		result.setResult(userPosts);
 		

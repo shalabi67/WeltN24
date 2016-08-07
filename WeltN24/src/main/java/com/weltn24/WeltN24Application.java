@@ -24,7 +24,20 @@ public class WeltN24Application {
 		return postsServiceUrl;
 	}
 	
+	@Value("${applicationUsersUrl}")
+	private String applicationUsersUrl;
 	
+	@Value("${applicationPostUrl}")
+	private String applicationPostsUrl;
+	
+	public String getApplicationUsersUrl() {
+		return applicationUsersUrl;
+	}
+
+	public String getApplicationPostsUrl() {
+		return applicationPostsUrl;
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(WeltN24Application.class, args);
 	}

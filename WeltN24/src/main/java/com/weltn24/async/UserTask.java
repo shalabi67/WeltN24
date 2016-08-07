@@ -30,7 +30,8 @@ public class UserTask implements Runnable  {
   			user = userEntity.getBody();
   		}
   		catch(RestClientException e) {
-  			e.printStackTrace();
+  			result.setErrorResult(e);
+  			return;
   		} 
   		result.setResult(user);
 		
