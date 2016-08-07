@@ -2,7 +2,7 @@ package com.weltn24.user;
 
 
 public final class User {
-	private int id;
+	private int id;  //changed from long to int due to test fail.
 	private String name;
 	private String username;
 	private String email;

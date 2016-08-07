@@ -2,8 +2,8 @@ package com.weltn24.user;
 
 
 public class Post {
-	private long userId;
-	private long id;
+	private int userId; //changed from long to int due to test fail
+	private int id;  //changed from long to int due to test fail
 	private String title;
 	private String body;
 	
@@ -11,19 +11,19 @@ public class Post {
 		
 	}
 
-	public long getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

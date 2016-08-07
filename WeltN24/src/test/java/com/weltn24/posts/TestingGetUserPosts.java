@@ -1,5 +1,6 @@
-package com.weltn24.users;
+package com.weltn24.posts;
 
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
@@ -17,20 +18,18 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.weltn24.WeltN24Application;
-import com.weltn24.user.User;
-
-
+import com.weltn24.user.Post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @WebAppConfiguration
-public class TestingGetUser {
+public class TestingGetUserPosts {
 	@Autowired
     private WebApplicationContext webApplicationContext;
 	
@@ -38,7 +37,7 @@ public class TestingGetUser {
 	WeltN24Application application;
 	
 	@Autowired
-	UserAdapter userAdapter;
+	PostAdapter postAdapter;
 	
 	private MockMvc mockMvc;
 	
@@ -48,13 +47,13 @@ public class TestingGetUser {
     }
 	
 	@Test
-	public void testGetUser() throws Exception {
-		ResultActions result = getUser(1);	
+	public void testGetUserPosts() throws Exception {
+		ResultActions result = getUserPosts(1);	
 		validate(result, 1);
 	}
 
-	private ResultActions getUser(long userId) throws Exception {
-		MvcResult mvcResult = mockMvc.perform(get("/users/" + userId))
+	private ResultActions getUserPosts(long userId) throws Exception {
+		MvcResult mvcResult = mockMvc.perform(get("/posts?userId=" + userId))
 				.andExpect(request().asyncStarted())
 		        .andReturn();
 		
@@ -62,21 +61,23 @@ public class TestingGetUser {
 		return result;
 	}
 	private void validate(ResultActions result, int userId) throws Exception {
-		User user = userAdapter.createUser(userId);
-		userAdapter.compareUser(user, result);
+		Post posts[] = postAdapter.createUserPosts(userId);
+		int i = 0;
+		for(Post post : posts) {
+			postAdapter.comparePost(post, result, i);
+			i++;
+		}
 	}
-	private void validateFail(ResultActions result) throws Exception {
-		result
-		.andExpect(status().is4xxClientError());
+	private void validateEmpty(ResultActions result) throws Exception {
+		result.andExpect(jsonPath("$", hasSize(0)));
 	}
 	
 	@Test
-	public void testUserNotFound() {
+	public void testUserPostsNotFound() {
 		ResultActions result;
 		try {
-			result = getUser(-1);
-			validateFail(result);
-			fail();
+			result = getUserPosts(-1);
+			validateEmpty(result);
 		} catch (Exception e) {
 			if(e.getCause() instanceof HttpClientErrorException) {
 				HttpClientErrorException ex = (HttpClientErrorException) e.getCause();
